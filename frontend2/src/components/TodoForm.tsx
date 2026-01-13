@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./styles/todoForm.css";
+
 interface Props {
   onAdd: (title: string, description?: string) => void;
 }
@@ -12,12 +13,34 @@ const TodoForm = ({ onAdd }: Props) => {
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!title.trim()) {
+    const trimmedTitle = title.trim();
+    const trimmedDescription = description.trim();
+
+    // Title required
+    if (!trimmedTitle) {
       setError("Title is required");
       return;
     }
 
-    onAdd(title, description);
+    // Title length validation
+    if (trimmedTitle.length < 3) {
+      setError("Title must be at least 3 characters");
+      return;
+    }
+
+    if (trimmedTitle.length > 50) {
+      setError("Title cannot exceed 50 characters");
+      return;
+    }
+
+    // Description length validation (optional field)
+    if (trimmedDescription.length > 200) {
+      setError("Description cannot exceed 200 characters");
+      return;
+    }
+
+    onAdd(trimmedTitle, trimmedDescription || undefined);
+
     setTitle("");
     setDescription("");
     setError("");
@@ -30,13 +53,22 @@ const TodoForm = ({ onAdd }: Props) => {
       <input
         placeholder="Title"
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        required
+        maxLength={50}
+        onChange={(e) => {
+          setTitle(e.target.value);
+          setError("");
+        }}
       />
 
       <input
         placeholder="Description"
         value={description}
-        onChange={(e) => setDescription(e.target.value)}
+        maxLength={200}
+        onChange={(e) => {
+          setDescription(e.target.value);
+          setError("");
+        }}
       />
 
       {error && <p style={{ color: "red" }}>{error}</p>}
