@@ -1,0 +1,12 @@
+# Backend env
+/backend/.env
+/backend/.env.local
+
+# Frontend env
+/frontend/.env
+/frontend/.env.local
+
+# Node modules and build folders
+/backend/node_modules/
+/frontend/node_modules/
+/frontend/build/
