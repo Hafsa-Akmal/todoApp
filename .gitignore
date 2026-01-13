@@ -1,12 +1,12 @@
 # Backend env
-/backend/.env
-/backend/.env.local
+/backend2/.env
+/backend2/.env.local
 
 # Frontend env
-/frontend/.env
-/frontend/.env.local
+/frontend2/.env
+/frontend2/.env.local
 
 # Node modules and build folders
-/backend/node_modules/
-/frontend/node_modules/
-/frontend/build/
+/backend2/node_modules/
+/frontend2/node_modules/
+/frontend2/build/
