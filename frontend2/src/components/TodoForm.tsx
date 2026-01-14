@@ -47,10 +47,9 @@ const TodoForm = ({ onAdd }: Props) => {
 
   return (
     <>
-      {/* Add Todo button */}
+   
       <button className="add-todo-btn" onClick={() => setShowModal(true)}>Add Todo</button>
 
-      {/* Modal */}
       {showModal && (
         <div className="modal-backdrop" onClick={() => setShowModal(false)}>
           <div

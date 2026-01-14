@@ -1,4 +1,4 @@
-// controllers/todo.controller.ts
+
 import { Request, Response } from "express";
 import { z } from "zod";
 import { prisma } from "../../lib/prisma";
@@ -24,7 +24,7 @@ const idParamSchema = z.object({
   id: z.coerce.number().int().positive("Invalid ID"),
 });
 
-// CREATE TODO
+// create
 export const createTodo = async (req: Request, res: Response) => {
   try {
     const parsed = createTodoSchema.safeParse(req.body);
