@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
-
+import "./App.css";
 
 import type { Todo } from "./types/Todo";
 
@@ -44,7 +44,7 @@ const App = () => {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>To-Do App (PERN + TypeScript)</h2>
+     <h2 className="app-header">To-Do App</h2>
 
       <TodoForm onAdd={addTodo} />
 
