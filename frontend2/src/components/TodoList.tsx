@@ -8,7 +8,6 @@ interface Props {
 }
 
 const TodoList = ({ todos, onDelete, onToggle }: Props) => {
-  // Empty state validation
   if (!todos || todos.length === 0) {
     return <p>No todos available</p>;
   }
@@ -24,33 +23,41 @@ const TodoList = ({ todos, onDelete, onToggle }: Props) => {
   };
 
   return (
-    <ul className="todo-list">
-      {todos.map((todo) => {
-        const title = todo.title?.trim();
-        const description = todo.description?.trim();
+    <table className="todo-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th className="actions">Actions</th>
+        </tr>
+      </thead>
 
-        // Skip invalid todo entries
-        if (!title) return null;
+      <tbody>
+        {todos.map((todo) => {
+          const title = todo.title?.trim();
+          const description = todo.description?.trim();
 
-        return (
-          <li key={todo.id}>
-            <strong>{title}</strong>
+          if (!title) return null;
 
-            <span> — {todo.status}</span>
-
-            {description && <span> : {description}</span>}
-
-            <button onClick={() => handleToggle(todo)}>
-              Status
-            </button>
-
-            <button onClick={() => handleDelete(todo.id)}>
-              Delete
-            </button>
-          </li>
-        );
-      })}
-    </ul>
+          return (
+            <tr key={todo.id} className={todo.status === "Completed" ? "completed" : ""}>
+              <td>{title}</td>
+              <td>{description || "-"}</td>
+              <td>{todo.status}</td>
+              <td className="actions">
+                <button className="btn btn-edit" onClick={() => handleToggle(todo)}>
+                  Toggle Status
+                </button>
+                <button className="btn btn-delete" onClick={() => handleDelete(todo.id)}>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
   );
 };
 

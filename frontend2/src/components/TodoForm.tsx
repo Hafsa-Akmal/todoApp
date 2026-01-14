@@ -1,3 +1,4 @@
+// TodoForm.tsx
 import { useState } from "react";
 import "./styles/todoForm.css";
 
@@ -6,6 +7,7 @@ interface Props {
 }
 
 const TodoForm = ({ onAdd }: Props) => {
+  const [showModal, setShowModal] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
@@ -31,48 +33,68 @@ const TodoForm = ({ onAdd }: Props) => {
       return;
     }
 
-
     if (trimmedDescription.length > 200) {
       setError("Description cannot exceed 200 characters");
       return;
     }
 
     onAdd(trimmedTitle, trimmedDescription || undefined);
-
     setTitle("");
     setDescription("");
     setError("");
+    setShowModal(false);
   };
 
   return (
-    <form className="todo-form" onSubmit={submitHandler}>
-      <h3>Add Todo</h3>
+    <>
+      {/* Add Todo button */}
+      <button className="add-todo-btn" onClick={() => setShowModal(true)}>Add Todo</button>
 
-      <input
-        placeholder="Title"
-        value={title}
-        required
-        maxLength={50}
-        onChange={(e) => {
-          setTitle(e.target.value);
-          setError("");
-        }}
-      />
+      {/* Modal */}
+      {showModal && (
+        <div className="modal-backdrop" onClick={() => setShowModal(false)}>
+          <div
+            className="modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="modal-close"
+              onClick={() => setShowModal(false)}
+            >
+              ×
+            </button>
 
-      <input
-        placeholder="Description"
-        value={description}
-        maxLength={200}
-        onChange={(e) => {
-          setDescription(e.target.value);
-          setError("");
-        }}
-      />
+            <form className="todo-form" onSubmit={submitHandler}>
+              <h3>Add Todo</h3>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+              <input
+                placeholder="Title"
+                value={title}
+                maxLength={50}
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                  setError("");
+                }}
+              />
 
-      <button type="submit">Add</button>
-    </form>
+              <input
+                placeholder="Description"
+                value={description}
+                maxLength={200}
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                  setError("");
+                }}
+              />
+
+              {error && <p style={{ color: "red" }}>{error}</p>}
+
+              <button type="submit">Add</button>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
