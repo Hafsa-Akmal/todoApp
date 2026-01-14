@@ -16,13 +16,11 @@ const TodoForm = ({ onAdd }: Props) => {
     const trimmedTitle = title.trim();
     const trimmedDescription = description.trim();
 
-    // Title required
     if (!trimmedTitle) {
       setError("Title is required");
       return;
     }
 
-    // Title length validation
     if (trimmedTitle.length < 3) {
       setError("Title must be at least 3 characters");
       return;
@@ -33,7 +31,7 @@ const TodoForm = ({ onAdd }: Props) => {
       return;
     }
 
-    // Description length validation (optional field)
+
     if (trimmedDescription.length > 200) {
       setError("Description cannot exceed 200 characters");
       return;

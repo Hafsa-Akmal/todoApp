@@ -2,7 +2,7 @@
 import type { Todo } from "../types/Todo";
 
 
-const API_URL = "http://localhost:5000/api/todos";
+const API_URL = import.meta.env.VITE_API_URL as string;
 
 export const getTodos = async (): Promise<Todo[]> => {
   const res = await fetch(API_URL);
