@@ -33,11 +33,7 @@ const TodoForm = ({ onAdd }: Props) => {
       return;
     }
 
-    if (trimmedDescription.length > 200) {
-      setError("Description cannot exceed 200 characters");
-      return;
-    }
-
+   
     onAdd(trimmedTitle, trimmedDescription || undefined);
     setTitle("");
     setDescription("");

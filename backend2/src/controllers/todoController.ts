@@ -16,9 +16,7 @@ const createTodoSchema = z.object({
     .optional(),
 });
 
-const updateTodoSchema = z.object({
-  status: z.enum(["pending", "completed"]),
-});
+
 
 const idParamSchema = z.object({
   id: z.coerce.number().int().positive("Invalid ID"),
