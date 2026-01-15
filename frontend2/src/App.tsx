@@ -16,6 +16,21 @@ import {
 const App = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
 
+
+
+const titles = todos.map(todo => todo.title);
+const filter = todos.filter(todo=>todo.status==="Completed");
+const find= todos.find(todo=>todo.id==29);
+const sort = [...todos].sort((a,b)=>a.title.localeCompare(b.title));
+const concat = todos.concat([{id:88,title:"New Todo",status:"Pending"}]);  
+
+console.log("Titles:", titles);
+console.log("Completed Todos:", filter);
+console.log("Todo with ID 29:", find);
+console.log("Sorted Todos by Title:", sort);
+console.log("Concatenated Todos:", concat);
+
+
   useEffect(() => {
     loadTodos();
   }, []);
@@ -34,8 +49,18 @@ const App = () => {
   
   const removeTodo = async (id: number) => {
   await deleteTodo(id);
-  setTodos((prev) => prev.filter((todo) => todo.id !== id));
+
+
+
+  setTodos(
+  
+  
+    (prev) => prev.filter((todo) => todo.id !== id)
+  
+  
+  );
 };
+
 
 
 const toggleStatus = async (todo: Todo) => {
@@ -44,13 +69,14 @@ const toggleStatus = async (todo: Todo) => {
   });
 
   setTodos((prev) =>
-    prev.map((t) => (t.id === todo.id ? updatedTodo : t))
+    prev.map((t) => (t.id === todo.id ? updatedTodo : t)
+  )
   );
 };
 
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div >
      <h2 className="app-header">To-Do App</h2>
 
       <TodoForm onAdd={addTodo} />

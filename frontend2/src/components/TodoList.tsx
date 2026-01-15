@@ -41,7 +41,7 @@ const TodoList = ({ todos, onDelete, onToggle }: Props) => {
           if (!title) return null;
 
           return (
-            <tr key={todo.id} className={todo.status === "Completed" ? "completed" : ""}>
+            <tr  className={todo.status === "Completed" ? "completed" : ""}>
               <td>{title}</td>
               <td>{description || "-"}</td>
               <td>{todo.status}</td>

@@ -50,6 +50,7 @@ export const getTodos = async (_req: Request, res: Response) => {
     const todos = await prisma.todo.findMany({
       orderBy: { id: "desc" },
     });
+    
     res.json(todos);
   } catch (err) {
     console.error(err);
@@ -59,7 +60,9 @@ export const getTodos = async (_req: Request, res: Response) => {
 
 // update
 export const updateTodo = async (req: Request, res: Response) => {
+  
   const idParsed = idParamSchema.safeParse(req.params);
+
   if (!idParsed.success) return res.status(400).json({ error: idParsed.error.issues[0].message });
 
   let statusRaw = req.body.status;

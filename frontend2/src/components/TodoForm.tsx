@@ -1,4 +1,4 @@
-// TodoForm.tsx
+
 import { useState } from "react";
 import "./styles/todoForm.css";
 
@@ -7,20 +7,20 @@ interface Props {
 }
 
 const TodoForm = ({ onAdd }: Props) => {
-  const [showModal, setShowModal] = useState(false);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [error, setError] = useState("");
+  const [showModal, setShowModal] = useState<boolean>(); //task1 :types declare
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const submitHandler = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault(); // task2 : check without this.
 
     const trimmedTitle = title.trim();
     const trimmedDescription = description.trim();
 
     if (!trimmedTitle) {
       setError("Title is required");
-      return;
+     return // task 3 : remove return behaviour
     }
 
     if (trimmedTitle.length < 3) {
@@ -64,7 +64,7 @@ const TodoForm = ({ onAdd }: Props) => {
             </button>
 
             <form className="todo-form" onSubmit={submitHandler}>
-              <h3>Add Todo</h3>
+              <h3 key={'addtodoheading'}>Add Todo</h3>
 
               <input
                 placeholder="Title"
