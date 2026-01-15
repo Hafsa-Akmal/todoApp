@@ -26,21 +26,28 @@ const App = () => {
   };
 
   const addTodo = async (title: string, description?: string) => {
-    await createTodo({ title, description });
-    loadTodos();
+    let newtodo=await createTodo({ title, description });
+    
+    setTodos((prev) => [newtodo,...prev, ]);    
   };
 
+  
   const removeTodo = async (id: number) => {
-    await deleteTodo(id);
-    loadTodos();
-  };
+  await deleteTodo(id);
+  setTodos((prev) => prev.filter((todo) => todo.id !== id));
+};
 
-  const toggleStatus = async (todo: Todo) => {
-    await updateTodo(todo.id, {
-      status: todo.status === "Pending" ? "Completed" : "Pending",
-    });
-    loadTodos();
-  };
+
+const toggleStatus = async (todo: Todo) => {
+  const updatedTodo = await updateTodo(todo.id, {
+    status: todo.status === "Pending" ? "Completed" : "Pending",
+  });
+
+  setTodos((prev) =>
+    prev.map((t) => (t.id === todo.id ? updatedTodo : t))
+  );
+};
+
 
   return (
     <div style={{ padding: "20px" }}>
