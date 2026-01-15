@@ -8,11 +8,11 @@ const createTodoSchema = z.object({
     .string()
     .trim()
     .min(1, "Title is required")
-    .max(50, "Title must be at most 50 characters"),
+    .min(3, "Title must be at most 3 characters"),
   description: z
     .string()
     .trim()
-    .max(200, "Description must be at most 200 characters")
+    .max(50, "Description must be at most 50 characters")
     .optional(),
 });
 
