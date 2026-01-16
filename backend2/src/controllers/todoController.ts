@@ -8,7 +8,8 @@ const createTodoSchema = z.object({
     .string()
     .trim()
     .min(1, "Title is required")
-    .min(3, "Title must be at most 3 characters"),
+    .min(3, "Title must be at least 3 characters")
+    .max(20, "Title must be at most 20 characters"),
   description: z
     .string()
     .trim()
@@ -26,7 +27,8 @@ const idParamSchema = z.object({
 export const createTodo = async (req: Request, res: Response) => {
   try {
     const parsed = createTodoSchema.safeParse(req.body);
-    if (!parsed.success) {
+    if
+     (!parsed.success) {
       return res.status(400).json({ error: parsed.error.issues[0].message });
     }
 

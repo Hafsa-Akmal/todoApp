@@ -28,13 +28,17 @@ const TodoForm = ({ onAdd }: Props) => {
       return;
     }
 
-    if (trimmedTitle.length > 50) {
-      setError("Title cannot exceed 50 characters");
+    if (trimmedTitle.length > 20) {
+      setError("Title cannot exceed 20 characters");
+      return;
+    }
+       if (trimmedDescription.length > 50) {
+      setError("Description cannot exceed 50 characters");
       return;
     }
 
    
-    onAdd(trimmedTitle, trimmedDescription || undefined);
+    onAdd(trimmedTitle, trimmedDescription );
     setTitle("");
     setDescription("");
     setError("");
@@ -65,7 +69,7 @@ const TodoForm = ({ onAdd }: Props) => {
               <input
                 placeholder="Title"
                 value={title}
-                maxLength={50}
+               
                 onChange={(e) => {
                   setTitle(e.target.value);
                   setError("");
@@ -75,7 +79,7 @@ const TodoForm = ({ onAdd }: Props) => {
               <input
                 placeholder="Description"
                 value={description}
-                maxLength={200}
+               
                 onChange={(e) => {
                   setDescription(e.target.value);
                   setError("");

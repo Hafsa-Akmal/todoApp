@@ -18,17 +18,17 @@ const App = () => {
 
 
 
-const titles = todos.map(todo => todo.title);
-const filter = todos.filter(todo=>todo.status==="Completed");
-const find= todos.find(todo=>todo.id==29);
-const sort = [...todos].sort((a,b)=>a.title.localeCompare(b.title));
-const concat = todos.concat([{id:88,title:"New Todo",status:"Pending"}]);  
+// const titles = todos.map(todo => todo.title);
+// const filter = todos.filter(todo=>todo.status==="Completed");
+// const find= todos.find(todo=>todo.id==29);
+// const sort = [...todos].sort((a,b)=>a.title.localeCompare(b.title));
+// const concat = todos.concat([{id:88,title:"New Todo",status:"Pending"}]);  
 
-console.log("Titles:", titles);
-console.log("Completed Todos:", filter);
-console.log("Todo with ID 29:", find);
-console.log("Sorted Todos by Title:", sort);
-console.log("Concatenated Todos:", concat);
+// console.log("Titles:", titles);
+// console.log("Completed Todos:", filter);
+// console.log("Todo with ID 29:", find);
+// console.log("Sorted Todos by Title:", sort);
+// console.log("Concatenated Todos:", concat);
 
 
   useEffect(() => {
