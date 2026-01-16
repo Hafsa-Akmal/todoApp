@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import "./App.css";
+import { Toaster } from "react-hot-toast";
 
 import type { Todo } from "./types/Todo";
 
@@ -78,7 +79,7 @@ const toggleStatus = async (todo: Todo) => {
   return (
     <div >
      <h2 className="app-header">To-Do App</h2>
-
+    <Toaster position="top-right" />  
       <TodoForm onAdd={addTodo} />
 
       <TodoList

@@ -1,10 +1,13 @@
 
 import { useState } from "react";
 import "./styles/todoForm.css";
+import toast from 'react-hot-toast';
+
 
 interface Props {
-  onAdd: (title: string, description?: string) => void;
+  onAdd: (title: string, description?: string) => Promise<void>;
 }
+
 
 const TodoForm = ({ onAdd }: Props) => {
   const [showModal, setShowModal] = useState<boolean>(); //task1 :types declare
@@ -12,37 +15,42 @@ const TodoForm = ({ onAdd }: Props) => {
   const [description, setDescription] = useState<string>("");
   const [error, setError] = useState<string>("");
 
-  const submitHandler = (e: React.FormEvent) => {
+  const submitHandler = async(e: React.FormEvent) => {
     e.preventDefault(); // task2 : check without this.
 
     const trimmedTitle = title.trim();
     const trimmedDescription = description.trim();
 
-    if (!trimmedTitle) {
-      setError("Title is required");
-     return // task 3 : remove return behaviour
-    }
+    // if (!trimmedTitle) {
+    //   setError("Title is required");
+    //  return // task 3 : remove return behaviour
+    // }
 
-    if (trimmedTitle.length < 3) {
-      setError("Title must be at least 3 characters");
-      return;
-    }
+    // if (trimmedTitle.length < 3) {
+    //   setError("Title must be at least 3 characters");
+    //   return;
+    // }
 
-    if (trimmedTitle.length > 20) {
-      setError("Title cannot exceed 20 characters");
-      return;
-    }
-       if (trimmedDescription.length > 50) {
-      setError("Description cannot exceed 50 characters");
-      return;
-    }
+    // if (trimmedTitle.length > 20) {
+    //   setError("Title cannot exceed 20 characters");
+    //   return;
+    // }
+    //    if (trimmedDescription.length > 50) {
+    //   setError("Description cannot exceed 50 characters");
+    //   return;
+    // }
 
-   
+     try {
+      await
     onAdd(trimmedTitle, trimmedDescription );
     setTitle("");
     setDescription("");
     setError("");
     setShowModal(false);
+      toast.success("Todo added successfully");
+    } catch (err: any) {
+      toast.error(err.message || "Something went wrong");
+    }
   };
 
   return (

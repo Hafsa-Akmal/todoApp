@@ -18,7 +18,12 @@ export const createTodo = async (todo: {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(todo),
   });
-  return res.json();
+const data =await res.json();
+if (!res.ok) {                      
+  throw new Error(data.error || "Failed to create todo");  
+}
+
+return data;   
 };
 
 export const updateTodo = async (id: number, todo: Partial<Todo>) => {
